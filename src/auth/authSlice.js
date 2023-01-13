@@ -1,17 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword,  signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword,  signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import  { auth } from "../firebaseConfig";
-
 
 export const registerUser = createAsyncThunk(
     "auth/registerUser",
-    async({email, password, fullname}, { dispatch}) => {
+    async({email, password, fullName}, { dispatch}) => {
         dispatch(creatingUser())
         try {
-            await createUserWithEmailAndPassword(auth, email, password).then((usr)=>{
-                dispatch(createUserSuccess(fullname))
-        })
-
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+             await updateProfile(userCredential?.user,{
+            displayName: fullName
+           });     
+           dispatch(createUserSuccess(userCredential.user.displayName));
         } catch (error) {
             dispatch(createUserFailed(error.message))
         }
@@ -23,8 +23,7 @@ export const loginUser = createAsyncThunk(
        try {
         dispatch(loginInUser())
         const user = await signInWithEmailAndPassword(auth, email, password);
-        dispatch(loginUserSuccess(user.user.uid))
-      
+        dispatch(loginUserSuccess(user.user.displayName));
        } catch (error) {
         dispatch(loginUserFailed(error.message))
         console.log(error)
@@ -41,7 +40,7 @@ export const logoutUser = createAsyncThunk(
 )
 
 const initialState = {
-    user: {},
+    user: "",
     isLoggedIn: false,
     isLoading: false,
     message: '',
@@ -56,7 +55,7 @@ const authSlice = createSlice({
           state.isLoading = true
         },
         createUserSuccess: (state, action) => {
-          state.displayName = action.payload;
+          state.user = action.payload;
           state.isLoggedIn = true;
           state.isLoading = false
           state.error = null
@@ -86,7 +85,7 @@ const authSlice = createSlice({
     
     extraReducers: (builder) => {
         builder
-        .addCase(registerUser.pending, (state, action) => {
+        .addCase(registerUser.pending, state => {
             state.isLoading = true;
         })
         .addCase(registerUser.fulfilled, (state, action) => {

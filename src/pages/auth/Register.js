@@ -31,7 +31,7 @@ export default function Register() {
                 toast.error(`Fields must not be empty`)
                 return
             }
-        };
+        };      
         dispatch(registerUser({email, password, fullName}));
        
     }
@@ -43,7 +43,7 @@ export default function Register() {
     }, [error]);
     useEffect(()=>{
         if(isLoggedIn){
-            navigate("/home")
+            navigate("/")
         }
     }, [isLoggedIn, navigate])
     return (
@@ -52,13 +52,13 @@ export default function Register() {
                 <img src={movieIcon} alt='movie-icon' />
                 <h3>Hi, Welcome</h3>
                 <h5>Please sign-in to your account and start your experience.</h5>
-                <InputField placeholder={'Full Name'} value={fullName} handleChange={setFullName} />
+                <InputField placeholder={'Full Name'} value={fullName} handleChange={setFullName}/>
                 <InputField placeholder={'Email'} value={email} handleChange={setEmail} />
-                <PasswordField placeholder="Password" value={password} handleChange={setPassword} />
+                <PasswordField placeholder="Password" value={password} handleChange={setPassword}/>
                 <Button title={"Register"} type="submit" isLoading={isLoading}/>
                 <div className='flex'>
                     <h6>Already have an account?</h6>
-                    <span onClick={() => navigate('/')}>Login</span>
+                    <span onClick={() => navigate('/login')}>Login</span>
                 </div>
             </form>
         </div>

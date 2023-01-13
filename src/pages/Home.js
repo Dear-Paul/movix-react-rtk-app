@@ -1,18 +1,21 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../auth/authSlice';
+import Layout from '../components/Layout';
 
 
  const Home = () => {
+  const [movies, setMovies] = useState([]);
+  const displayName = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
+  
   const onLogout = () => {
     dispatch(logoutUser());
-    console.log("worked")
   }
   return (
-    <div>Home
+      <Layout>
       <button onClick={onLogout}></button>
-    </div>
+      </Layout>
   )
 }
 

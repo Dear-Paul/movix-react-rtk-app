@@ -8,14 +8,14 @@ import Home from "./pages/Home";
 
 function App() {
 
-  const ProtectedHome = RequireAuthentication(Home)
+  const ProtectedHome = RequireAuthentication(Home);
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<ProtectedHome/>}/>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/home" element={<ProtectedHome/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
       </Router>
       <ToastContainer/>

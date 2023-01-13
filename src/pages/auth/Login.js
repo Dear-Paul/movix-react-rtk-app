@@ -13,7 +13,7 @@ import "./auth.scss";
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
-    const {user: name, error, isLoading, isLoggedIn, message } = useSelector((state) => state.auth);
+    const { error, isLoading, isLoggedIn, message } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -25,17 +25,15 @@ export default function Login() {
         };
         for(const key in user){
             if(user[key] === '' || user[key] === undefined){
-                toast.error("All fields must be field")              
+                toast.error("All fields must not be empty")              
                 return
             }
         }
         dispatch(loginUser({email, password}));
-        if(!isLoading && isLoggedIn){
-            navigate('/home')
+        if(isLoggedIn){
+            navigate('/')
         }
     }
-
-    console.log(name, isLoading, error, isLoggedIn, "dtails")
 
     useEffect(() => {
         if(error){
@@ -46,11 +44,6 @@ export default function Login() {
             }
         }
     }, [error, message])
-    // const authed = useAuth();
-    // useEffect(()=>{
-    //     if(isLoggedIn)
-    //     navigate('/home')
-    // }, [])
   return (
     <div>
         <form className="auth-login" onSubmit={onLogin}>
