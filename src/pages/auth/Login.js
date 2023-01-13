@@ -19,10 +19,8 @@ export default function Login() {
             email, 
             password
         };
-        console.log(user)
         for(const key in user){
             if(user[key] === '' || user[key] === undefined){
-                // toast.error(`${user[key]} must not be empty`);
                 toast.error("All fields must be field")
                 
                 return

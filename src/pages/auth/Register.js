@@ -24,7 +24,6 @@ export default function Register() {
         for(const key in user){
             if(user[key] === '' || user[key] === undefined){
                 toast.error(`Fields must not be empty`)
-                console.log("Here", user[key])
                 return
             }
         }
