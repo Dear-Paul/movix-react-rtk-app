@@ -1,0 +1,187 @@
+.auth-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 28px 36px;
+    gap: 14px;
+    margin: auto;
+    position: absolute;
+    width: 450px;
+    height: 604px;
+    left: 539px;
+    top: 192px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+
+    h3 {
+        width: 112px;
+        height: 23px;
+        // font-family: 'Bauziet';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 23px;
+        text-align: center;
+        // font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+        color: #000000;
+    }
+
+    h5 {
+        width: 394px;
+        // height: 19px;
+
+        /* text-small */
+
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height, or 131% */
+
+        text-align: center;
+        font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+
+        /* grey-1 */
+
+        color: #747474;
+
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    h6 {
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height, or 131% */
+
+        text-align: center;
+        font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+
+        /* grey-1 */
+
+        color: #747474;
+    }
+
+    span {
+        width: 37px;
+        height: 19px;
+
+        /* text-small */
+        cursor: pointer;
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height, or 131% */
+
+        text-align: center;
+        font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+
+        color: #B91C1C;
+    }
+}
+
+.auth-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 28px 36px;
+    gap: 14px;
+    margin: auto;
+    position: absolute;
+    width: 450px;
+    height: 529px;
+    left: 539px;
+    top: 192px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+
+    h3 {
+        width: 112px;
+        height: 23px;
+        // font-family: 'Bauziet';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 23px;
+        text-align: center;
+        // font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+        color: #000000;
+    }
+
+    h5 {
+        width: 394px;
+        // height: 19px;
+
+        /* text-small */
+
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height, or 131% */
+
+        text-align: center;
+        font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+
+        /* grey-1 */
+
+        color: #747474;
+
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    h6 {
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height, or 131% */
+
+        text-align: center;
+        font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+
+        /* grey-1 */
+
+        color: #747474;
+    }
+
+    span {
+        width: 37px;
+        height: 19px;
+
+        /* text-small */
+        cursor: pointer;
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        /* identical to box height, or 131% */
+
+        text-align: center;
+        font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
+
+        color: #B91C1C;
+    }
+}
