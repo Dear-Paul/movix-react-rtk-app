@@ -30,10 +30,13 @@ export default function Login() {
             }
         }
         dispatch(loginUser({email, password}));
+    }
+
+    useEffect(()=>{
         if(isLoggedIn){
             navigate('/')
         }
-    }
+    }, [isLoggedIn, navigate])
 
     useEffect(() => {
         if(error){
@@ -44,6 +47,7 @@ export default function Login() {
             }
         }
     }, [error, message])
+
   return (
     <div>
         <form className="auth-login" onSubmit={onLogin}>
