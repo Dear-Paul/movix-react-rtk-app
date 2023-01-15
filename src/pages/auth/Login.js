@@ -8,14 +8,16 @@ import { loginUser } from '../../auth/authSlice';
 import Button from '../../components/button/Button';
 import InputField from '../../components/input/InputField';
 import PasswordField from '../../components/input/PasswordField';
+import useAuth from '../../customHooks/useAuth';
 import "./auth.scss";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
-    const { error, isLoading, isLoggedIn, message } = useSelector((state) => state.auth);
+    const { error, isLoading} = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const authUser = useAuth();
 
     const onLogin = (e) => {
         e.preventDefault();
@@ -30,23 +32,20 @@ export default function Login() {
             }
         }
         dispatch(loginUser({email, password}));
-    }
-
-    useEffect(()=>{
-        if(isLoggedIn){
+        if(authUser){
             navigate('/')
         }
-    }, [isLoggedIn, navigate])
+    }
+    
+    useEffect(()=>{
+        console.log(authUser, 'poll');
+    }, [authUser])
 
     useEffect(() => {
         if(error){
             toast.error(error)
-        } else {
-            if(message){
-                toast.success(message)
-            }
-        }
-    }, [error, message])
+        } 
+    }, [error])
 
   return (
     <div>
