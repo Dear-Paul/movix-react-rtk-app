@@ -1,4 +1,3 @@
-import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import useAuth from "./useAuth";
 export default function RequireAuthentication(WrappedComponent) {

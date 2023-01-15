@@ -98,12 +98,33 @@
                 justify-content: space-between;
                 padding: 0px;
                 gap: 27px;
-
+                cursor: pointer;
                 width: 166px;
                 height: 36px;
                 left: 1216px;
                 top: 22px;
 
+                .logout {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 6px 16px;
+                    gap: 8px;
+                    background: #BE123C;
+                    border-radius: 6px;
+                    width: 100px;
+                    height: 30px;
+                    margin-left: 30px;
+                    margin-top: 60px;
+                    font-family: 'DM Sans';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFFFF;
+                    animation: ease-in 2ms;
+                }
 
                 >h5 {
                     width: 103px;
@@ -299,10 +320,11 @@
             padding: 0px;
             gap: 48px;
             width: 1240px;
-            height: 288.12px;
+            height: 340px;
             margin-left: 98px;
             margin-top: 44px;
             overflow: hidden;
+
         }
 
         .featured-casts {
@@ -312,11 +334,11 @@
             padding: 0px;
             gap: 80px;
             width: 1240px;
-            height: 405px;
+            height: 455px;
             margin-left: 98px;
             margin-top: 44px;
-
-
+            overflow-y: hidden;
+            overflow-x: scroll;
         }
 
 

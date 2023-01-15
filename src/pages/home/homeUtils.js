@@ -54,4 +54,6 @@ export const exclusiveVideos = [
         title: "A new Era",
         image: thumbnail
     },
-]
+];
+
+export const baseUrl = "https://api.themoviedb.org/3/";

@@ -80,6 +80,10 @@ const authSlice = createSlice({
         logoutExistingUser: (state, action) => {
             state.isLoggedIn = false;
             state.message = action.payload
+        },
+        authorizedUser: (state, action) => {
+            state.isLoggedIn = true;
+            state.user = action.payload;
         }
       },
     
@@ -117,6 +121,6 @@ const authSlice = createSlice({
     },
 
 });
-export const {creatingUser, createUserSuccess, createUserFailed, loginInUser, loginUserSuccess, loginUserFailed, logoutExistingUser} = authSlice.actions
+export const {creatingUser, createUserSuccess, createUserFailed, loginInUser, loginUserSuccess, loginUserFailed, logoutExistingUser, authorizedUser} = authSlice.actions
 export default authSlice.reducer
 

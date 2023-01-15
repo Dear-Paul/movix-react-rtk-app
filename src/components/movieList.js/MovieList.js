@@ -1,12 +1,12 @@
 import Movie from '../movie/Movie';
 import './movieList.scss';
-const MovieList = () => {
+const MovieList = ({movies}) => {
     return (
         <div className="movie-list">
-            <Movie/>
-            <Movie/>
-            <Movie/>
-            <Movie/>
+           {movies?.map((movie) => (
+             <Movie movie={movie}/>
+           ))}
+           
         </div>
     )
 }

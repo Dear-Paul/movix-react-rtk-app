@@ -6,10 +6,16 @@
     gap: 12px;
 
     width: 450px;
-    height: 288.12px;
+    height: 300px;
 
     .video-image {
         position: relative;
+
+        > img {
+            width: 450px;
+            height: 290px;
+            background-size: auto;
+        }
 
         .play {
             position: absolute;

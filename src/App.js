@@ -13,10 +13,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          {/* <Route path="/" element={<ProtectedHome/>}/>
+          <Route path="/" element={<ProtectedHome/>}/>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}/> */}
-          <Route path="/" element={<Home/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
       </Router>
       <ToastContainer/>

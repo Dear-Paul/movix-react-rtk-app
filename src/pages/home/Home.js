@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../auth/authSlice';
-import { casts } from '../../components/featuredCast.js/featuredCastUtils';
+import { authorizedUser, logoutUser } from '../../auth/authSlice';
 import './home.scss';
 import tv from '../../assets/tv.svg';
 import search from '../../assets/search.svg';
@@ -10,22 +9,98 @@ import tomatoes from '../../assets/tomatoes.svg';
 import imbd from '../../assets/imbd.svg';
 import play from '../../assets/play.svg';
 import smChevronRight from '../../assets/sm-chevron-right.svg';
-import Movie from '../../components/movie/Movie';
 import MovieList from '../../components/movieList.js/MovieList';
 import FeaturedCast from '../../components/featuredCast.js/FeaturedCast';
-import { exclusiveVideos, policies, socials } from './homeUtils';
+import { baseUrl, policies, socials } from './homeUtils';
 import ExclusiveVideo from '../../components/exclusiveVideo/ExclusiveVideo';
+import Spinner from '../../components/spinner/Spinner';
+import { useDebounce } from '../../customHooks/useDebounce';
+import useAuth from '../../customHooks/useAuth';
+
+
 
 
 // TODO: Fix Login issue
+const key = process.env.REACT_APP_MOVIE_API_KEY
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
-  const displayName = useSelector(state => state.auth.user);
+  const [fetchTrending, setFetchTrending] = useState(false)
+  const [trendingVideos, setTrendingVideos] = useState([]);
+  const [fetchingCasts, setFetchingCasts] = useState(false);
+  const [casts, setCasts] = useState([]);
+  const [fetchExclusiveVideos, setFetchExclusiveVideos] = useState(false);
+  const [exclusiveVideos, setExclusiveVideos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showLogout, setShowLogout] = useState(false);
+  const userDisplayName = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
+  const currentUser = useAuth();
 
+  const fetchMovies = async () => {
+    setIsLoading(true)
+    const res =  await fetch(`${baseUrl}/movie/top_rated?api_key=${key}&language=en-US`);
+    const movies = await res.json();
+      setMovies(movies.results)
+      setIsLoading(false);
+  };
+
+  const newArrivals = async () => {
+    setFetchTrending(true)
+    const res = await fetch(`${baseUrl}/trending/movie/week?api_key=${key}&language=en-US`);
+    const trending = await res.json();
+    setTrendingVideos(trending.results);
+    setFetchTrending(false);
+  };
+
+  const getExclusiveVideos = async () => {
+    setFetchExclusiveVideos(true);
+    const res = await fetch(`${baseUrl}/movie/upcoming?api_key=${key}&language=en-US`);
+    const contents = await res.json();
+    setExclusiveVideos(contents.results);
+    setFetchExclusiveVideos(false);
+
+  }
+
+  const featuredCasts = async () => {
+    setFetchingCasts(true);
+    const res = await fetch(`${baseUrl}/person/popular?api_key=${key}&language=en-US&page=1`);
+    const featured = await res.json();
+    setCasts(featured.results)
+    setFetchingCasts(false);
+  };
+
+  const searchMovie = async (query) => {
+    setIsLoading(true);
+    const res = await fetch(`${baseUrl}/search/movie?api_key=${key}&language=en-US&page=1&query=${query}`);
+    const movies = await res.json();
+    setMovies(movies.results);
+    setIsLoading(false);
+  }
+  const debouncedValue = useDebounce(searchTerm, 500);
+  useEffect(()=>{
+    if(debouncedValue){
+      searchMovie(debouncedValue);
+    }
+  }, [debouncedValue])
+  useEffect(()=>{
+    fetchMovies();
+    newArrivals();
+    getExclusiveVideos()
+    featuredCasts();
+  }, []);
+
+  useEffect(()=>{
+    if(currentUser){
+      dispatch(authorizedUser(currentUser.currentUser.displayName));
+    }
+  }, [currentUser, dispatch])
+  
   const onLogout = () => {
     dispatch(logoutUser());
   }
+
+  
   return (
 
     <>
@@ -37,12 +112,13 @@ const Home = () => {
               <span>Movix</span>
             </div>
             <div className='with-search'>
-              <input placeholder='What do you want to watch?' />
+              <input placeholder='What do you want to watch?' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
               <img src={search} alt="search-icon" />
             </div>
             <div className='with-menu'>
-              <h5>Hi, William</h5>
-              <img src={menu} alt="menu" />
+                {userDisplayName && <h5>Hi, {userDisplayName} </h5>}  
+              <img src={menu} alt="menu" onClick={()=>setShowLogout(true)}/>
+              {showLogout ? <div className='logout' onClick={onLogout}>Logout</div>: ''}
             </div>
           </div>
           <div className='description-box'>
@@ -77,7 +153,10 @@ const Home = () => {
               <img src={smChevronRight} alt="right arrow" />
             </div>
           </div>
-          <MovieList />
+          {isLoading ? <Spinner/> : 
+          <MovieList movies={movies}/> 
+          }
+          
         </div>
 
         <div className='movie-section'>
@@ -88,7 +167,10 @@ const Home = () => {
               <img src={smChevronRight} alt="right arrow" />
             </div>
           </div>
-          <MovieList />
+          {fetchTrending ? <Spinner/> : 
+          <MovieList movies={trendingVideos}/> 
+          }
+          {/* <MovieList /> */}
         </div>
 
         <div className='movie-section'>
@@ -100,14 +182,14 @@ const Home = () => {
             </div>
           </div>
         <div className='exclusive-videos'>
-          {exclusiveVideos.map(({title, image},i) => (
-             <ExclusiveVideo
-             key={i}
-             title={title}
-             image={image}
-             />
-          ))}
          
+          {fetchExclusiveVideos ? <Spinner/> : exclusiveVideos.map((video, i) => (
+              <ExclusiveVideo
+                key={i}
+                video={video}
+            />
+            )
+          )}
         </div>
         </div>
 
@@ -120,11 +202,10 @@ const Home = () => {
             </div>
           </div>
           <div className='featured-casts'>
-            {casts.length > 0 && casts.map(({ title, image }, i) => (
+            {fetchingCasts ? <Spinner/> : casts.map((cast, i) => (
               <FeaturedCast
                 key={i}
-                title={title}
-                image={image}
+                cast={cast}
             />
             )
           )}
@@ -152,7 +233,7 @@ const Home = () => {
       </div>
     </>
 
-    // {/* <button onClick={onLogout}>Logout</button> */}
+    
 
   )
 }

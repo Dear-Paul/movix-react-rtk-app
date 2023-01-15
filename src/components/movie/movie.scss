@@ -11,6 +11,11 @@
     .image {
         position: relative;
 
+        >img {
+            width: 250px;
+            height: 370px;
+        }
+
         .rating {
             position: absolute;
             display: flex;

@@ -1,13 +1,12 @@
 import './movie.scss';
-import postImg from '../../assets/poster-image.svg';
 import heartIcon from '../../assets/heart-icon.svg';
 import tomatoes from '../../assets/tomatoes.svg';
 import imbd from '../../assets/imbd.svg';
-const Movie = () => {
+const Movie = (movie) => {
     return (
         <div className="movie-card">
             <div className='image'>
-                <img src={postImg} alt='test' />
+                <img src={`http://image.tmdb.org/t/p/w500/${movie.movie.poster_path}`} alt='poster' />
                 <div className='rating'>
                     <div className='tv-series'>
                         <span>TV SERIES</span>
@@ -19,8 +18,8 @@ const Movie = () => {
                 </div>
             </div>
 
-            <h4>USA, 2016 - CURRENT</h4>
-            <h3>Stranger Things</h3>
+            <h4>Released: {movie.movie.release_date}</h4>
+            <h3>{movie.movie.title}</h3>
             <div className='movie-rating'>
               <div className='item'>
                 <img src={imbd} alt="imbd" />
