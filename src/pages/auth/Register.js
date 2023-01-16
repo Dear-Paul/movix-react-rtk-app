@@ -18,7 +18,7 @@ export default function Register() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {error, isLoading, isLoggedIn} = useSelector((state) => state.auth)
+    const { isLoading, isLoggedIn} = useSelector((state) => state.auth)
     const onRegister = (e) => {
         e.preventDefault();
         const user = {
@@ -36,16 +36,11 @@ export default function Register() {
        
     }
    
-    useEffect(() => {
-        if(error){
-            toast.error(error)
-        }
-    }, [error]);
     useEffect(()=>{
         if(isLoggedIn){
             navigate("/")
         }
-    }, [isLoggedIn, navigate])
+    }, [isLoggedIn, navigate]);
     return (
         <div>
             <form onSubmit={onRegister} className="auth-register">
