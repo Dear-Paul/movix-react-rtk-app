@@ -76,7 +76,7 @@ const authSlice = createSlice({
         },
         loginInUser: state => {
             state.isLoading = true
-            state.isLoggedIn = false;
+            state.isLoggedIn = false
         },
         loginUserSuccess: (state, action) => {
             state.isLoading = false;
@@ -91,7 +91,6 @@ const authSlice = createSlice({
             state.isLoggedIn = false;
         },
         authorizedUser: (state, action) => {
-            state.isLoggedIn = true;
             state.user = action.payload;
         }
       },

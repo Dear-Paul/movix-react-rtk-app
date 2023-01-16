@@ -10,13 +10,13 @@ import InputField from '../../components/input/InputField';
 import PasswordField from '../../components/input/PasswordField';
 import "./auth.scss";
 
+
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
     const { isLoading, isLoggedIn} = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
     const onLogin = (e) => {
         e.preventDefault();
         const user = {
@@ -38,7 +38,6 @@ export default function Login() {
             navigate('/')
         }
     }, [isLoggedIn, navigate])
-
 
   return (
     <div>

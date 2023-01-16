@@ -8,14 +8,12 @@ import {  registerUser } from '../../auth/authSlice';
 import Button from '../../components/button/Button';
 import InputField from '../../components/input/InputField';
 import PasswordField from '../../components/input/PasswordField';
-import "./auth.scss";
-
+import "./auth.scss"; 
 
 export default function Register() {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isLoading, isLoggedIn} = useSelector((state) => state.auth)
