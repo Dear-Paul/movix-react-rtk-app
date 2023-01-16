@@ -10,17 +10,16 @@ import imbd from '../../assets/imbd.svg';
 import play from '../../assets/play.svg';
 import smChevronRight from '../../assets/sm-chevron-right.svg';
 import MovieList from '../../components/movieList.js/MovieList';
-import FeaturedCast from '../../components/featuredCast.js/FeaturedCast';
+import FeaturedCast from '../../components/featuredCast/FeaturedCast';
 import { baseUrl, policies, socials } from './homeUtils';
 import ExclusiveVideo from '../../components/exclusiveVideo/ExclusiveVideo';
 import Spinner from '../../components/spinner/Spinner';
 import { useDebounce } from '../../customHooks/useDebounce';
 import useAuth from '../../customHooks/useAuth';
+import WithArrow from '../../components/withArrow/WithArrow';
 
 
 
-
-// TODO: Fix Login issue
 const key = process.env.REACT_APP_MOVIE_API_KEY
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,13 +35,12 @@ const Home = () => {
   const userDisplayName = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
   const currentUser = useAuth();
-
   const fetchMovies = async () => {
     setIsLoading(true)
-    const res =  await fetch(`${baseUrl}/movie/top_rated?api_key=${key}&language=en-US`);
+    const res = await fetch(`${baseUrl}/movie/top_rated?api_key=${key}&language=en-US`);
     const movies = await res.json();
-      setMovies(movies.results)
-      setIsLoading(false);
+    setMovies(movies.results)
+    setIsLoading(false);
   };
 
   const newArrivals = async () => {
@@ -78,29 +76,29 @@ const Home = () => {
     setIsLoading(false);
   }
   const debouncedValue = useDebounce(searchTerm, 500);
-  useEffect(()=>{
-    if(debouncedValue){
+  useEffect(() => {
+    if (debouncedValue) {
       searchMovie(debouncedValue);
     }
   }, [debouncedValue])
-  useEffect(()=>{
+  useEffect(() => {
     fetchMovies();
     newArrivals();
     getExclusiveVideos()
     featuredCasts();
   }, []);
 
-  useEffect(()=>{
-    if(currentUser){
+  useEffect(() => {
+    if (currentUser) {
       dispatch(authorizedUser(currentUser.currentUser.displayName));
     }
   }, [currentUser, dispatch])
-  
+
   const onLogout = () => {
     dispatch(logoutUser());
   }
 
-  
+
   return (
 
     <>
@@ -112,13 +110,13 @@ const Home = () => {
               <span>Movix</span>
             </div>
             <div className='with-search'>
-              <input placeholder='What do you want to watch?' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+              <input placeholder='What do you want to watch?' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
               <img src={search} alt="search-icon" />
             </div>
             <div className='with-menu'>
-                {userDisplayName && <h5>Hi, {userDisplayName} </h5>}  
-              <img src={menu} alt="menu" onClick={()=>setShowLogout(true)}/>
-              {showLogout ? <div className='logout' onClick={onLogout}>Logout</div>: ''}
+              {userDisplayName && <h5>Hi, {userDisplayName} </h5>}
+              <img src={menu} alt="menu" onClick={() => setShowLogout(true)} />
+              {showLogout ? <div className='logout' onClick={onLogout}>Logout</div> : ''}
             </div>
           </div>
           <div className='description-box'>
@@ -145,70 +143,79 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='movie-section'>
-          <div className='title'>
-            <h1>Featured Movie</h1>
-            <div className='see-more'>
-              <span>See more</span>
-              <img src={smChevronRight} alt="right arrow" />
+        <WithArrow>
+          <div className='movie-section'>
+            <div className='title'>
+              <h1>Featured Movie</h1>
+              <div className='see-more'>
+                <span>See more</span>
+                <img src={smChevronRight} alt="right arrow" />
+              </div>
             </div>
-          </div>
-          {isLoading ? <Spinner/> : 
-          <MovieList movies={movies}/> 
-          }
-          
-        </div>
+            {isLoading ? <Spinner /> :
+              <MovieList movies={movies} />
+            }
 
-        <div className='movie-section'>
-          <div className='title'>
-            <h1>New Arrival</h1>
-            <div className='see-more'>
-              <span>See more</span>
-              <img src={smChevronRight} alt="right arrow" />
-            </div>
           </div>
-          {fetchTrending ? <Spinner/> : 
-          <MovieList movies={trendingVideos}/> 
-          }
-        </div>
+        </WithArrow>
 
-        <div className='movie-section'>
-          <div className='title'>
-            <h1>Exclusive Videos</h1>
-            <div className='see-more'>
-              <span>See more</span>
-              <img src={smChevronRight} alt="right arrow" />
+        <WithArrow>
+          <div className='movie-section'>
+            <div className='title'>
+              <h1>New Arrival</h1>
+              <div className='see-more'>
+                <span>See more</span>
+                <img src={smChevronRight} alt="right arrow" />
+              </div>
             </div>
+            {fetchTrending ? <Spinner /> :
+              <MovieList movies={trendingVideos} />
+            }
           </div>
-        <div className='exclusive-videos'>      
-          {fetchExclusiveVideos ? <Spinner/> : exclusiveVideos.map((video, i) => (
-              <ExclusiveVideo
-                key={i}
-                video={video}
-            />
-            )
-          )}
-        </div>
-        </div>
+        </WithArrow>
 
-        <div className='movie-section'>
-          <div className='title'>
-            <h1>Featured Casts</h1>
-            <div className='see-more'>
-              <span>See more</span>
-              <img src={smChevronRight} alt="right arrow" />
+        <WithArrow>
+          <div className='movie-section'>
+            <div className='title'>
+              <h1>Exclusive Videos</h1>
+              <div className='see-more'>
+                <span>See more</span>
+                <img src={smChevronRight} alt="right arrow" />
+              </div>
+            </div>
+            <div className='exclusive-videos'>
+              {fetchExclusiveVideos ? <Spinner /> : exclusiveVideos.map((video, i) => (
+                <ExclusiveVideo
+                  key={i}
+                  video={video}
+                />
+              )
+              )}
             </div>
           </div>
-          <div className='featured-casts'>
-            {fetchingCasts ? <Spinner/> : casts.map((cast, i) => (
-              <FeaturedCast
-                key={i}
-                cast={cast}
-            />
-            )
-          )}
+        </WithArrow>
+
+        <WithArrow>
+          <div className='movie-section'>
+            <div className='title'>
+              <h1>Featured Casts</h1>
+              <div className='see-more'>
+                <span>See more</span>
+                <img src={smChevronRight} alt="right arrow" />
+              </div>
+            </div>
+            <div className='featured-casts'>
+              {fetchingCasts ? <Spinner /> : casts.map((cast, i) => (
+                <FeaturedCast
+                  key={i}
+                  cast={cast}
+                />
+              )
+              )}
+            </div>
           </div>
-        </div>
+        </WithArrow>
+
         <div className='footer-section'>
           <div className='socials'>
             {socials.map(({ image, link }, index) => (
@@ -231,7 +238,7 @@ const Home = () => {
       </div>
     </>
 
-    
+
 
   )
 }

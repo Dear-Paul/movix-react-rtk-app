@@ -125,9 +125,6 @@
                     font-weight: 700;
                     font-size: 16px;
                     line-height: 24px;
-                    /* identical to box height, or 150% */
-
-
                     color: #FFFFFF;
                 }
             }
@@ -143,7 +140,6 @@
 
             position: absolute;
             width: 404px;
-            // height: 285px;
             left: 98px;
             top: 158px;
 
@@ -153,9 +149,6 @@
                 font-weight: 700;
                 font-size: 48px;
                 line-height: 56px;
-                /* or 117% */
-
-
                 color: #FFFFFF;
             }
 
@@ -172,9 +165,6 @@
                     font-weight: 400;
                     font-size: 12px;
                     line-height: 12px;
-                    /* identical to box height, or 100% */
-
-
                     color: #FFFFFF;
                 }
 
@@ -196,9 +186,6 @@
                     font-weight: 500;
                     font-size: 14px;
                     line-height: 18px;
-                    /* or 129% */
-
-
                     color: #FFFFFF;
                 }
 
@@ -214,9 +201,6 @@
                 cursor: pointer;
                 width: 169px;
                 height: 36px;
-
-                /* rose/700 */
-
                 background: #BE123C;
                 border-radius: 6px;
 
@@ -226,12 +210,7 @@
                     font-weight: 700;
                     font-size: 14px;
                     line-height: 24px;
-                    /* identical to box height, or 171% */
-
                     text-transform: uppercase;
-
-                    /* white */
-
                     color: #FFFFFF;
                 }
             }
@@ -239,97 +218,94 @@
         }
     }
 
-    .movie-section {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .title {
+        .movie-section {
+            width: 100%;
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0px;
-            gap: 83px;
-
-            // position: absolute;
-            width: 1244px;
-            height: 47px;
-            margin-left: 98px;
-            margin-top: 70px;
-
-            >h1 {
-                height: 47px;
-                left: 98px;
-                font-family: 'DM Sans';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 36px;
-                line-height: 47px;
-                /* identical to box height */
-
-
-                color: #000000;
-            }
-
-            .see-more {
+            flex-direction: column;
+            justify-content: center;
+    
+            .title {
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
                 align-items: center;
                 padding: 0px;
-                gap: 8px;
-
-                width: 107px;
-                height: 24px;
-
-                >span {
-                    width: 79px;
-                    height: 24px;
-
+                gap: 83px;
+    
+                width: 1244px;
+                height: 47px;
+                margin-left: 98px;
+                margin-top: 70px;
+    
+                >h1 {
+                    height: 47px;
+                    left: 98px;
                     font-family: 'DM Sans';
                     font-style: normal;
-                    font-weight: 400;
-                    font-size: 18px;
-                    line-height: 24px;
-                    color: #BE123C;
+                    font-weight: 700;
+                    font-size: 36px;
+                    line-height: 47px;
+  
+                    color: #000000;
                 }
-
+    
+                .see-more {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 0px;
+                    gap: 8px;
+    
+                    width: 107px;
+                    height: 24px;
+    
+                    >span {
+                        width: 79px;
+                        height: 24px;
+    
+                        font-family: 'DM Sans';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 24px;
+                        color: #BE123C;
+                    }
+    
+                }
             }
+    
+            .exclusive-videos {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                padding: 0px;
+                gap: 48px;
+                width: 1240px;
+                height: 450px;
+                margin-left: 98px;
+                margin-top: 44px;
+                margin-bottom: 1rem;
+                overflow-y: hidden;
+    
+            }
+    
+            .featured-casts {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                padding: 0px;
+                gap: 80px;
+                width: 1240px;
+                height: 455px;
+                margin-left: 98px;
+                margin-top: 44px;
+                overflow-y: hidden;
+                overflow-x: scroll;
+            }
+    
+    
         }
-
-        .exclusive-videos {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            padding: 0px;
-            gap: 48px;
-            width: 1240px;
-            height: 450px;
-            margin-left: 98px;
-            margin-top: 44px;
-            margin-bottom: 1rem;
-            overflow-y: hidden;
-
-        }
-
-        .featured-casts {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            padding: 0px;
-            gap: 80px;
-            width: 1240px;
-            height: 455px;
-            margin-left: 98px;
-            margin-top: 44px;
-            overflow-y: hidden;
-            overflow-x: scroll;
-        }
-
-
-    }
-
+  
     .footer-section {
         display: flex;
         flex-direction: column;
@@ -371,7 +347,6 @@
         }
 
         .copyright {
-            // width: 114px;
             height: 23px;
             color: #6B7280;
             display: flex;
