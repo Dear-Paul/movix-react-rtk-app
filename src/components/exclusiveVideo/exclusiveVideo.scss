@@ -6,14 +6,17 @@
     gap: 12px;
 
     width: 450px;
-    height: 300px;
-
+    height: 450px;
+   
     .video-image {
         position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         > img {
             width: 450px;
-            height: 290px;
+            height: 400px;
             background-size: auto;
         }
 
@@ -22,7 +25,7 @@
             width: 60px;
             height: 60px;
             left: 195px;
-            top: 97px;
+            top: 170px;
         }
     }
 

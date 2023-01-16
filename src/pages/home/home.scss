@@ -292,11 +292,6 @@
                     font-weight: 400;
                     font-size: 18px;
                     line-height: 24px;
-                    /* identical to box height, or 133% */
-
-
-                    /* rose/700 */
-
                     color: #BE123C;
                 }
 
@@ -310,10 +305,11 @@
             padding: 0px;
             gap: 48px;
             width: 1240px;
-            height: 340px;
+            height: 450px;
             margin-left: 98px;
             margin-top: 44px;
-            overflow: hidden;
+            margin-bottom: 1rem;
+            overflow-y: hidden;
 
         }
 

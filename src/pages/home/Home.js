@@ -170,7 +170,6 @@ const Home = () => {
           {fetchTrending ? <Spinner/> : 
           <MovieList movies={trendingVideos}/> 
           }
-          {/* <MovieList /> */}
         </div>
 
         <div className='movie-section'>
@@ -181,8 +180,7 @@ const Home = () => {
               <img src={smChevronRight} alt="right arrow" />
             </div>
           </div>
-        <div className='exclusive-videos'>
-         
+        <div className='exclusive-videos'>      
           {fetchExclusiveVideos ? <Spinner/> : exclusiveVideos.map((video, i) => (
               <ExclusiveVideo
                 key={i}
