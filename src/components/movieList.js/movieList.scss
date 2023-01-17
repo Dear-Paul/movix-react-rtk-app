@@ -9,6 +9,9 @@
     margin-left: 98px;
     margin-top: 44px;
     overflow-y: hidden;
-    overflow-x:scroll
-    // overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.movie-list::-webkit-scrollbar {
+    display: none;
 }
